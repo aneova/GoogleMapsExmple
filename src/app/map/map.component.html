@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+<mat-sidenav-container class="w-100">
+  <mat-sidenav style="width: 21rem;" #sidenav [mode]="mode.value" position="begin">
+    <!--Left Panel-->
+    <ng-container>
+        <div class="row">
+          <div class="col-sm-12">
+              <span class="text-primary font-weight-bold"> <i class="hideMenu" (click)="sidenav.toggle()"> < </i> отчет от 27.04.2020
+                <i class="material-icons float-right btn-info" (click)="openBottomSheet()">bar_chart</i>
+              </span>
+
+            <div class="d-block position-relative">
+              <div class="outer-circle d-inline-block">
+                <div class="inner-circle">
+                  <b style="color: #b11f1f; margin-left: 20px; margin-top: -8px; position: absolute;"> КОЛОДЕЦ_1 </b>
+                </div>
+              </div>
+
+              <div class="line d-inline-block">
+
+                <div *ngFor="let item of itemList; let i=index">
+                <div class="{{item.header}}">
+                <div class="vSegment"></div>
+                  <div class="hSegment"></div>
+                  <b style="position: absolute; margin-top: 26px; margin-left: 25px;">{{item.deep}}</b>
+                  <div class="item_details">
+                  <mat-accordion>
+                    <mat-expansion-panel  [expanded]="item.selected" [class.selected]="item.selected" [ngStyle]="{'background':item.backgr}">
+                      <mat-expansion-panel-header> {{item.content}}</mat-expansion-panel-header>
+                      <hr/>
+                      {{item.content}}
+                      <hr/>
+                      <button class="btn-info">Медиафайлы</button>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+                </div>
+                </div>
+              </div>
+
+              <div class="outer-circle d-inline-block end">
+                <div class="inner-circle">
+                  <b style="color: #b11f1f; margin-left: 20px; margin-top: -8px; position: absolute;"> КОЛОДЕЦ_1 </b>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+      </div>
+    </ng-container>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <section>
+      <agm-map style="height: 900px;" [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+        <agm-polyline (lineClick)="openBottomSheet()"  [strokeColor]="'#ff0943'" [strokeWeight]="7" [editable]="false">
+          <agm-polyline-point  *ngFor="let data of flightPlanCoordinates"
+                              [latitude]="data.lat"
+                              [longitude]="data.lng">
+          </agm-polyline-point>
+        </agm-polyline>
+        <!--        first tube -->
+        <agm-polyline  (lineClick)="openMenu(1)" [strokeColor]="'#0cc6b7'" [strokeWeight]="8" [editable]="false">
+          <agm-polyline-point  *ngFor="let data of tubes[0]"
+                               [latitude]="data.lat"
+                               [longitude]="data.lng">
+          </agm-polyline-point>
+        </agm-polyline>
+        <!--        second tube -->
+        <agm-polyline  (lineClick)="openMenu(2)" [strokeColor]="'#f654d0'" [strokeWeight]="8" [editable]="false">
+          <agm-polyline-point  *ngFor="let data of tubes[1]"
+                               [latitude]="data.lat"
+                               [longitude]="data.lng">
+          </agm-polyline-point>
+        </agm-polyline>
+
+        <agm-circle  *ngFor="let data of flightPlanCoordinates"
+                     [latitude]="data.lat"
+                     [longitude]="data.lng"
+                     [radius]="1"
+                     [fillColor]="'#ff0943'"
+        >
+        </agm-circle>
+      </agm-map>
+    </section>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+    </div>
+  </div>
+</div>
