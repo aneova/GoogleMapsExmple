@@ -1,0 +1,19 @@
+<p class="lead">График уклона </p>
+<div class="row h-auto" style="min-width: 700px">
+<div class="col-6 chart-wrapper">
+  <canvas baseChart
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins">
+  </canvas>
+</div>
+<div class="col-6">
+  <input type="checkbox"> Показать сетку
+  <br>
+  <input type="checkbox"> Отобразить повреждения
+</div>
+</div>
